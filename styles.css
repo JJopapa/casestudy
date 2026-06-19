@@ -1,0 +1,1227 @@
+/* ==========================================================================
+   DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+:root {
+  /* Colors */
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #000000;
+  --color-text-light: #000000;
+  --color-text-dark: #ffffff;
+  --color-point: #39ff14; /* Electric Neon Green */
+
+  /* Fonts */
+  --font-primary: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+/* Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-light);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--color-text-light);
+  background-color: var(--color-bg-light);
+  overflow-x: hidden;
+  transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scroll Snap (Optional but native and smooth if desired, not hijacking) */
+main {
+  width: 100%;
+}
+
+/* ==========================================================================
+   LAYOUT & SECTIONS
+   ========================================================================== */
+.section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding: 8vw;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* SECTION 1: HERO */
+.section-hero {
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg-light);
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 12vw, 9.5rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+/* HERO FOOTER & METADATA */
+.hero-footer-wrapper {
+  position: absolute;
+  bottom: 4.5rem;
+  left: 8vw;
+  right: 8vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 45%;
+  pointer-events: auto;
+}
+
+.hero-author-name {
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  font-weight: 900;
+  color: var(--color-bg-dark);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+}
+
+.hero-author-title {
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0.6rem;
+}
+
+.hero-author-desc {
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.55);
+  max-width: 320px;
+  word-break: keep-all;
+}
+
+.hero-author-location {
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  margin-top: 0.8rem;
+  display: block;
+  word-break: keep-all;
+}
+
+.hero-footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  max-width: 45%;
+  pointer-events: auto;
+  transform: translateY(var(--parallax-y, 0px));
+  transition: transform 0.1s ease-out;
+}
+
+.hero-meta-item {
+  font-size: clamp(10px, 1vw, 11px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
+}
+
+.project-case {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.project-case .case-label {
+  font-size: 9px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.project-case .case-title {
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 900;
+  color: var(--color-bg-dark);
+}
+
+/* LinkedIn Icon link */
+.hero-social-link {
+  margin-top: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.hero-social-link a {
+  display: inline-block;
+  line-height: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-social-link a:hover {
+  transform: scale(1.15);
+}
+
+.linkedin-svg-icon {
+  fill: var(--color-bg-dark);
+  transition: fill 0.3s ease;
+}
+
+.hero-social-link a:hover .linkedin-svg-icon {
+  fill: var(--color-point);
+}
+
+/* SECTION-WIDE COPYRIGHT (8pt Gray) */
+.section-copyright {
+  position: absolute;
+  bottom: 2rem;
+  left: 8vw;
+  font-size: 8pt;
+  color: rgba(0, 0, 0, 0.35);
+  font-family: var(--font-primary);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Home Section copyright aligned right */
+.hero-copyright {
+  left: auto;
+  right: 8vw;
+  text-align: right;
+}
+
+/* dark background exceptions */
+body.dark-mode .section-copyright,
+#impact .section-copyright {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* SECTION 2: THE CONTEXT */
+.section-context {
+  padding: 0; /* 분할 그리드가 영역을 꽉 채우도록 패딩 초기화 */
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg-light);
+}
+
+.context-bg-image {
+  position: absolute;
+  top: 10vh;
+  left: -2vw;
+  width: 40vw;
+  height: 80vh;
+  background-image: url('img/befor old model - c850.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+  filter: grayscale(100%) contrast(110%);
+  opacity: 0.08; /* 가독성에 지장 없는 8% 투명도 */
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(var(--context-parallax-y, 0px));
+  transition: transform 0.1s ease-out;
+}
+
+.context-split-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.context-left {
+  width: 55%;
+  padding: 8vw 5vw 8vw 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.context-right {
+  width: 45%;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  padding: 8vw 8vw 8vw 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+  border-left: 2px solid var(--color-point); /* 브루탈리스트 느낌을 살리는 강렬한 수직 절단 경계선 */
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.context-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.section-subheading {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 3rem;
+  opacity: 0.6;
+}
+
+.staggered-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* 세로 간격 최적화 */
+}
+
+.staggered-lines .line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 750px;
+  word-break: keep-all;
+}
+
+.staggered-lines .line .title-block {
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem); /* 50% 분할 레이아웃에 맞춰 폰트 크기 최적 조율 */
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  display: block;
+}
+
+.js-enabled .staggered-lines .line .desc-text {
+  font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+  font-weight: 300;
+  line-height: 1.7; /* 줄간격 확장으로 가독성 최적화 */
+  color: rgba(0, 0, 0, 0.7);
+  max-width: 600px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.5s;
+}
+
+.staggered-lines .line.active .desc-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.staggered-lines .line .desc-text strong {
+  font-weight: 900;
+  color: var(--color-bg-dark);
+  border-bottom: 2px solid var(--color-point); /* 네온 그린 포인트 밑줄로 시각적 피드백 제공 */
+  padding-bottom: 2px;
+}
+
+/* 4. Cross-Functional Alignment Challenge (Black BG Zone) Styling */
+.alignment-box {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.alignment-sub {
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-point);
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.alignment-title {
+  font-size: clamp(1.8rem, 4.5vw, 4.5rem); /* Hero 급으로 폰트 크기 및 계층 구조 대폭 확장 */
+  font-weight: 900;
+  line-height: 0.85; /* Hero 스타일처럼 극도로 좁은 줄간격으로 임팩트 극대화 */
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  margin-bottom: 3.5rem;
+  word-break: keep-all;
+}
+
+.alignment-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 500px; /* 본문 좌우폭 제한으로 시각적 밸런스 유지 */
+  border-top: 1px solid rgba(255, 255, 255, 0.15); /* 본문과 타이틀을 구별하는 미니멀 보더 */
+  padding-top: 2.5rem;
+  text-align: left; /* 본문의 가독성을 위해 본문은 좌측 정렬 */
+}
+
+.alignment-desc {
+  font-size: clamp(0.9rem, 1.2vw, 1rem); /* 본문은 1~3번과 유사한 크기로 두어 타이틀의 거대함을 대조적으로 더 돋보이게 함 */
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  word-break: keep-all;
+}
+
+.alignment-desc strong.neon-highlight {
+  font-weight: 900;
+  color: var(--color-point);
+  border-bottom: 2px solid var(--color-point);
+  padding-bottom: 2px;
+}
+
+/* staggered visual hierarchy */
+.staggered-lines .line:nth-child(2) {
+  margin-left: 3vw; /* 스플릿 영역 침범을 피하기 위해 마진 축소 */
+}
+
+.staggered-lines .line:nth-child(3) {
+  margin-left: 6vw;
+}
+
+/* SECTION 3: ACTION & LEADERSHIP */
+.section-action {
+  align-items: center;
+  background-color: var(--color-bg-light);
+  position: relative;
+  overflow: hidden;
+  padding: 8vw;
+}
+
+.action-bg-image {
+  position: absolute;
+  top: 5vh;
+  right: -5vw;
+  width: 45vw;
+  height: 90vh;
+  background-image: url('img/iw950 rc.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center right;
+  filter: grayscale(100%) contrast(110%);
+  opacity: 0.08; /* 가독성에 방해되지 않는 투명도 8% */
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(var(--action-parallax-y, 0px));
+  transition: transform 0.1s ease-out;
+}
+
+.section-action .container {
+  position: relative;
+  z-index: 2; /* 글씨가 항상 이미지 위에 렌더링되도록 보장 */
+}
+
+.action-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.focus-keyword {
+  font-size: clamp(2.2rem, 6vw, 4.5rem); /* 원고 볼륨에 최적화된 서체 크기 */
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0; /* action-header가 마진을 제어하므로 단독 마진 제거 */
+}
+
+/* FIT Reason Box (Floating Header Card) */
+.fit-reason-box {
+  background: var(--color-bg-dark); /* 검정색 배경 반전 적용 */
+  color: var(--color-text-dark);
+  padding: 2rem 2.5rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 340px;
+  width: 100%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  margin-top: 0;
+}
+
+.reason-sub {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-point); /* 네온 그린 서브 헤더 */
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.reason-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.reason-list li {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.reason-list li::before {
+  content: '✓';
+  color: var(--color-point);
+  font-weight: 900;
+}
+
+.leadership-grid {
+  display: flex;
+  gap: 4vw;
+  width: 100%;
+  margin-bottom: 3.5rem; /* 하단 요약 인용구를 바짝 붙이기 위해 마진 축소 */
+  align-items: flex-start;
+}
+
+.leadership-col {
+  width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-top: 2px solid var(--color-bg-dark); /* 브루탈리스트 수평 가로 격자선 */
+  padding-top: 2rem;
+}
+
+.col-title {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-bg-dark);
+}
+
+.col-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.col-list li {
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.col-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-bg-dark);
+  font-weight: 900;
+}
+
+/* Summary Box Styling */
+.leadership-summary {
+  width: 100%;
+  border-left: 4px solid var(--color-bg-dark);
+  padding: 1.5rem 0 1.5rem 3rem;
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-prefix {
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.65);
+  word-break: keep-all;
+}
+
+.summary-core {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-bg-dark);
+  word-break: keep-all;
+}
+
+/* SECTION 4: THE IMPACT (Climax / Absolute Contrast) */
+.section-impact {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  padding: 10vw 8vw;
+}
+
+/* Brutalist Transition override: when active body class toggles */
+body.dark-mode {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
+
+.impact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12vh;
+}
+
+.impact-card {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.impact-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.impact-card .number {
+  font-size: clamp(4.5rem, 15vw, 12.5rem);
+  font-weight: 900;
+  color: var(--color-point);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+}
+
+.impact-card .label {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.impact-card .badge {
+  font-size: 0.5em;
+  font-weight: 900;
+  background: var(--color-point);
+  color: var(--color-bg-dark);
+  padding: 0.4em 0.8em;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* SECTION 5: THE LESSON & CTA */
+.section-lesson {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
+  align-items: center;
+  justify-content: center;
+  position: relative; /* footer 배치를 위해 relative 명시 */
+  padding-bottom: 15vw; /* 푸터 공간 확보를 위해 하단 패딩 확장 */
+}
+
+.central-layout {
+  text-align: center;
+  align-items: center;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.4;
+  margin-bottom: 2rem; /* 설명문 삽입을 위해 마진 축소 */
+  font-weight: 400;
+  color: var(--color-text-light);
+}
+
+.philosophy-text {
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 4rem;
+  max-width: 650px;
+  word-break: keep-all;
+  text-align: center;
+}
+
+/* Footer Section Styling */
+.footer {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 8vw;
+  right: 8vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 2.5rem;
+  z-index: 10;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.footer-name {
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  font-weight: 900;
+  color: var(--color-bg-dark);
+  letter-spacing: -0.01em;
+}
+
+.footer-title {
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.footer-location {
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.footer-copyright {
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.cta-wrapper {
+  display: inline-block;
+}
+
+.cta-button {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  border: none;
+  padding: 1.5rem 3.5rem;
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  outline: none;
+  text-decoration: none; /* a 태그 밑줄 링크 스타일 제거 */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease;
+}
+
+.cta-button .btn-arrow {
+  font-size: 1.3em;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Button micro-animations */
+.cta-button:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.cta-button:hover .btn-arrow {
+  transform: translateX(10px);
+}
+
+.cta-button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.cta-button:focus-visible {
+  outline: 3px solid var(--color-point);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   ANIMATIONS: MASK REVEAL
+   ========================================================================== */
+.js-enabled .mask-reveal {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  transform: translateY(40px);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mask-reveal.active {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transform: translateY(0);
+}
+
+/* Delays for staggered lines */
+.staggered-lines .line:nth-child(1).active { transition-delay: 0.1s; }
+.staggered-lines .line:nth-child(2).active { transition-delay: 0.25s; }
+.staggered-lines .line:nth-child(3).active { transition-delay: 0.4s; }
+.staggered-lines .line:nth-child(4).active { transition-delay: 0.55s; }
+
+/* Delays for Action items */
+.action-item:nth-child(1).active { transition-delay: 0.1s; }
+.action-item:nth-child(2).active { transition-delay: 0.25s; }
+.action-item:nth-child(3).active { transition-delay: 0.4s; }
+
+/* ==========================================================================
+   HEADER & NAVIGATION
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 4rem;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+
+.header .logo {
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: #ffffff; /* mix-blend-mode: difference 와 조합하여 배경 반전 대응 */
+}
+
+.header .nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.header .nav-link {
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff; /* mix-blend-mode: difference 와 조합하여 배경 반전 대응 */
+  letter-spacing: 0.1em;
+  position: relative;
+  padding-bottom: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.header .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-point);
+  transition: width 0.3s ease;
+}
+
+.header .nav-link:hover::after {
+  width: 100%;
+}
+
+/* ==========================================================================
+   SECTION 3.5: DECISIONS
+   ========================================================================== */
+.section-decisions {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-light);
+  align-items: center;
+  padding: 8vw 0 8vw 8vw; /* 우측 패딩을 날려 검정 박스를 화면 끝으로 밀착 */
+}
+
+.decisions-title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+}
+
+.decisions-grid {
+  display: flex;
+  gap: 4vw;
+  width: 100%;
+  align-items: center; /* 왼쪽 Decisions와 오른쪽 박스의 수직 세로 정렬 일치 */
+}
+
+.decisions-list {
+  width: 45%; /* 왼쪽 리스트 비율 최적화 */
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.decision-card {
+  border-left: 3px solid var(--color-bg-dark);
+  padding: 0.8rem 0 0.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-enabled .decision-card {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.decision-card.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.decision-card:nth-child(1).active { transition-delay: 0.1s; }
+.decision-card:nth-child(2).active { transition-delay: 0.25s; }
+.decision-card:nth-child(3).active { transition-delay: 0.4s; }
+.decision-card:nth-child(4).active { transition-delay: 0.55s; }
+
+.decision-num {
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.decision-text {
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 900;
+  line-height: 1.4;
+  color: var(--color-bg-dark);
+  word-break: keep-all;
+}
+
+/* Before & After Comparison Board */
+.comparison-board {
+  width: 55%; /* 오른쪽 박스 비율 확장 */
+  display: flex;
+  background: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  border-radius: 4px 0 0 4px; /* 화면 우측 끝에 닿으므로 왼쪽만 모서리 라운딩 */
+  padding: 6rem 6vw;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: none; /* 우측 한계선이 닿으므로 오른쪽 테두리 제거 */
+  margin-right: 0;
+  opacity: 0;
+  transform: scale(0.98) translateY(20px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.3s;
+}
+
+.js-enabled .comparison-board {
+  opacity: 0;
+  transform: scale(0.98) translateY(20px);
+}
+
+.comparison-board.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.compare-col {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.before-col {
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.compare-header {
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 3.5rem;
+  display: block;
+}
+
+.before-col .compare-header {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.after-col .compare-header {
+  color: var(--color-point); /* AFTER 타이틀 강조 */
+}
+
+.compare-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.compare-item {
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.before-col .compare-item {
+  text-decoration: line-through; /* 직관적인 취소선 처리 */
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.after-col .compare-item {
+  color: var(--color-point); /* 네온 그린 포인트 강조 */
+}
+
+.footer-disclaimer {
+  display: block;
+  font-size: 8pt;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 0.8rem;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.4;
+  max-width: 320px;
+  font-weight: 300;
+}
+
+body.dark-mode .footer-disclaimer {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 2rem;
+  }
+
+  .header .logo {
+    font-size: 1rem;
+  }
+
+  .header .nav {
+    gap: 1rem;
+  }
+
+  .section {
+    padding: 12vw 6vw;
+  }
+  
+  .hero-footer-wrapper {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    margin-top: 5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    width: 100%;
+    pointer-events: auto;
+  }
+
+  .hero-footer-left {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-author-desc {
+    max-width: 100%;
+    margin-top: 0.6rem;
+  }
+
+  .hero-footer-right {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .project-case {
+    margin-top: 1rem;
+    align-items: center;
+  }
+
+  .hero-social-link {
+    margin-top: 1rem;
+  }
+
+  .section-copyright,
+  .hero-copyright {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    margin-top: 4rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+
+  .footer-disclaimer {
+    text-align: center;
+    max-width: 100%;
+    margin-top: 0.8rem;
+  }
+
+  /* Challenge 스플릿 모바일 대응 */
+  .context-split-wrapper {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .context-left {
+    width: 100%;
+    padding: 16vw 6vw 12vw 6vw;
+  }
+
+  .context-right {
+    width: 100%;
+    padding: 16vw 6vw;
+    border-left: none;
+    border-top: 3px solid var(--color-point); /* 모바일에서는 세로 구분선을 가로 구분선으로 변환 */
+  }
+  
+  .staggered-lines .line:nth-child(2),
+  .staggered-lines .line:nth-child(3) {
+    margin-left: 0;
+  }
+  
+  /* Decisions 모바일 레이아웃 */
+  .decisions-grid {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .decisions-list, .comparison-board {
+    width: 100%;
+  }
+
+  .comparison-board {
+    padding: 3rem 1.5rem;
+  }
+
+  .compare-item {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+
+  /* Leadership 모바일 레이아웃 */
+  .action-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .fit-reason-box {
+    max-width: 100%;
+  }
+
+  .leadership-grid {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .leadership-col {
+    width: 100%;
+    padding-top: 1.5rem;
+  }
+
+  .leadership-summary {
+    padding-left: 1.5rem;
+  }
+  
+  .impact-cards {
+    gap: 8vh;
+  }
+
+  /* 마지막 페이지 및 푸터 모바일 대응 */
+  .section-lesson {
+    padding-bottom: 20vw;
+  }
+
+  .footer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    margin-top: 6rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    width: 100%;
+    padding-top: 2rem;
+  }
+
+  .footer-left {
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+}
