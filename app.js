@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const maskElements = document.querySelectorAll('.mask-reveal, .decision-card, .comparison-board, .leadership-col, .leadership-summary');
   maskElements.forEach(el => {
-    // 히어로 섹션 타이틀은 대기 없이 즉각 활성화
-    if (el.classList.contains('hero-title')) {
+    // 히어로 섹션 타이틀 및 요약 스크린 내부 요소는 대기 없이 즉각 활성화
+    if (el.classList.contains('hero-title') || el.closest('.summary-screen')) {
       setTimeout(() => {
         el.classList.add('active');
       }, 50);
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updateParallax = () => {
     // 1) Hero Section Parallax
-    if (microText && lastScrollY < window.innerHeight) {
+    if (microText && lastScrollY < window.innerHeight * 2) {
       const parallaxOffset = lastScrollY * 0.12; 
       microText.style.setProperty('--parallax-y', `${parallaxOffset}px`);
     }
@@ -158,15 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     6. CTA BUTTON INTERACTIVE FEEDBACK
+     6. CTA BUTTON INTERACTIVE FEEDBACK (자바스크립트 리스너 제거 - CSS :active로 대체)
      ========================================================================== */
-  const ctaBtn = document.querySelector('.cta-button');
-  if (ctaBtn) {
-    ctaBtn.addEventListener('click', () => {
-      ctaBtn.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        ctaBtn.style.transform = 'scale(1.06)';
-      }, 150);
-    });
-  }
 });

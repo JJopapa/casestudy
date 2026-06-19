@@ -32,32 +32,66 @@
   </header>
 
   <main>
-    <!-- SECTION 1: HERO -->
-    <section id="hero" class="section section-hero" aria-label="Hero Introduction">
-      <div class="hero-content">
-        <h1 class="hero-title mask-reveal">Value<br>Over<br>Features.</h1>
-      </div>
-      
-      <!-- HERO FOOTER -->
-      <div class="hero-footer-wrapper">
-        <div class="hero-footer-left">
-          <span class="hero-author-name">JO YOUNGSEOK</span>
-          <span class="hero-author-title">Product Development &<br>Commercialization Leader</span>
-          <p class="hero-author-desc">15 years of experience transforming customer needs into commercially successful products.</p>
-          <span class="hero-author-location">Based in Malaysia | Open to Regional Opportunities</span>
+    <!-- SECTION 1: HERO (Parent Wrapper for extended layout) -->
+    <section id="hero" class="section-hero-parent" aria-label="Hero and Executive Summary">
+      <!-- SCREEN 1: HERO MAIN -->
+      <div class="hero-screen main-screen">
+        <div class="hero-content">
+          <h1 class="hero-title mask-reveal">Value<br>Over<br>Features.</h1>
         </div>
-        <div class="hero-footer-right" id="hero-micro-text">
-          <div class="hero-meta-item project-case">
-            <span class="case-label">Case Study #01</span>
-            <span class="case-title">IW950 Integrated Bidet Toilet</span>
+        
+        <!-- HERO FOOTER -->
+        <div class="hero-footer-wrapper">
+          <div class="hero-footer-left">
+            <span class="hero-author-name">JO YOUNGSEOK</span>
+            <span class="hero-author-title">Product Development &<br>Commercialization Leader</span>
+            <p class="hero-author-desc">15 years of experience transforming customer needs into commercially successful products.</p>
+            <span class="hero-author-location">Based in Malaysia &middot; Open to Regional Leadership Opportunities</span>
           </div>
-          <!-- 세련된 링크드인 아이콘 -->
-          <div class="hero-social-link">
-            <a href="https://www.linkedin.com/in/youngseok-jo" target="_blank" rel="noopener noreferrer" aria-label="Jo Youngseok's LinkedIn Profile">
-              <svg class="linkedin-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
+          <div class="hero-footer-right" id="hero-micro-text">
+            <div class="hero-meta-item project-case">
+              <span class="case-label">Case Study #01</span>
+              <span class="case-title">IW950 Integrated Bidet Toilet</span>
+            </div>
+            <!-- 세련된 링크드인 아이콘 -->
+            <div class="hero-social-link">
+              <span class="social-label">Connect on LinkedIn</span>
+              <a href="https://www.linkedin.com/in/youngseok-jo" target="_blank" rel="noopener noreferrer" aria-label="Jo Youngseok's LinkedIn Profile">
+                <svg class="linkedin-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: HERO SUMMARY (핵심 요약) -->
+      <div class="hero-screen summary-screen">
+        <div class="summary-bg-image"></div>
+        <div class="summary-container">
+          <h2 class="summary-project-title mask-reveal">IW950 Integrated Bidet Toilet</h2>
+          <div class="summary-details-grid">
+            <div class="detail-block mask-reveal">
+              <span class="detail-label">Role</span>
+              <span class="detail-value">Product Development Lead</span>
+            </div>
+            <div class="detail-block mask-reveal">
+              <span class="detail-label">Industry</span>
+              <span class="detail-value">Smart Sanitaryware</span>
+            </div>
+            <div class="detail-block mask-reveal">
+              <span class="detail-label">Team</span>
+              <span class="detail-value">Cross-functional Task Force</span>
+            </div>
+            <div class="detail-block mask-reveal">
+              <span class="detail-label">Impact</span>
+              <div class="detail-impact-values">
+                <span class="impact-val"><strong class="highlight-point">-35%</strong> Production Cost</span>
+                <span class="impact-val"><strong class="highlight-point">10,000+</strong> Units Sold</span>
+                <span class="impact-val"><strong class="highlight-point">KRW 3.3B+</strong> Revenue</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -81,6 +115,7 @@
               <p class="desc-text">
                 As the Korean residential housing market moved beyond its peak growth cycle, developers faced increasing pressure to <strong>differentiate their projects</strong> while maintaining competitive selling prices. This created strong demand for bathroom products that could deliver a <strong>premium customer experience</strong> without significantly increasing project costs. The challenge was to develop a product that <strong>balanced premium positioning with aggressive cost targets</strong>.
               </p>
+              <span class="summary-line">Premium expectations with aggressive cost targets.</span>
             </div>
             
             <div class="line mask-reveal">
@@ -88,6 +123,7 @@
               <p class="desc-text">
                 Existing integrated bidet toilets had been developed primarily with a design-driven approach, prioritizing feature expansion and product differentiation. While this strategy supported innovation, it also resulted in <strong>increased product complexity</strong>, higher manufacturing costs, and limited scalability for mass production. Many features added engineering and sourcing burdens without providing proportional customer value. The opportunity was to <strong>simplify the product architecture</strong> while <strong>preserving the features that mattered most</strong> to customers.
               </p>
+              <span class="summary-line">Product complexity exceeded customer value.</span>
             </div>
             
             <div class="line mask-reveal">
@@ -95,6 +131,7 @@
               <p class="desc-text">
                 The existing platform relied on large and complex molded components that were <strong>highly sensitive to production variation</strong>. Combined with limited production volumes caused by weak price competitiveness, manufacturing efficiency remained low and quality consistency became increasingly difficult to maintain. The business challenge extended beyond product design—it required <strong>improving manufacturability</strong>, reducing production costs, and creating a platform capable of supporting <strong>stable, large-scale production</strong>.
               </p>
+              <span class="summary-line">Manufacturing variation limited scalability.</span>
             </div>
             
           </div>
@@ -198,6 +235,7 @@
             <div class="decision-card mask-reveal">
               <span class="decision-num">Decision #1</span>
               <p class="decision-text">Focused investment on customer-valued features</p>
+              <p class="decision-subtext">Removed features that increased cost without improving customer value.</p>
             </div>
             <div class="decision-card mask-reveal">
               <span class="decision-num">Decision #2</span>
@@ -206,6 +244,7 @@
             <div class="decision-card mask-reveal">
               <span class="decision-num">Decision #3</span>
               <p class="decision-text">Standardized key components</p>
+              <p class="decision-subtext">Reduced sourcing complexity and simplified assembly.</p>
             </div>
             <div class="decision-card mask-reveal">
               <span class="decision-num">Decision #4</span>
@@ -248,15 +287,15 @@
         <div class="impact-cards">
           <div class="impact-card" id="impact-1">
             <div class="number">-35%</div>
-            <div class="label">Production Cost</div>
+            <div class="label">Production Cost Reduction</div>
           </div>
           <div class="impact-card" id="impact-2">
             <div class="number">10,000+</div>
-            <div class="label">Units Sold <span class="badge">Category Best-Seller</span></div>
+            <div class="label">Annual Units Sold <span class="badge">Category Best-Seller</span></div>
           </div>
           <div class="impact-card" id="impact-3">
             <div class="number">KRW 3.3B+</div>
-            <div class="label">Annual Revenue</div>
+            <div class="label">Annual Revenue Generated</div>
           </div>
         </div>
       </div>
@@ -274,8 +313,8 @@
           I believe great products are created by balancing customer needs, business objectives, and operational excellence.
         </p>
         <div class="cta-wrapper">
-          <a href="https://www.linkedin.com/in/youngseok-jo" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Let's Build the Next Product Together. Open Jo Youngseok's LinkedIn profile in a new window.">
-            <span class="btn-text">Let's Build the Next Product Together</span>
+          <a href="https://www.linkedin.com/in/youngseok-jo/" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Build the Next Product. Open Jo Youngseok's LinkedIn profile in a new window.">
+            <span class="btn-text">BUILD THE NEXT PRODUCT</span>
             <span class="btn-arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
