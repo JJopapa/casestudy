@@ -64,9 +64,25 @@ main {
 }
 
 /* SECTION 1: HERO */
-.section-hero {
-  justify-content: center;
+.section-hero-parent {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-screen {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding: 8vw;
+  box-sizing: border-box;
   align-items: center;
+  justify-content: center;
+}
+
+.main-screen {
   background-color: var(--color-bg-light);
 }
 
@@ -81,6 +97,125 @@ main {
   line-height: 0.85;
   letter-spacing: -0.04em;
   text-transform: uppercase;
+}
+
+/* SCREEN 2: SUMMARY SCREEN (Home Extended Page) */
+.summary-screen {
+  background-color: var(--color-bg-light);
+  overflow: hidden;
+}
+
+.summary-bg-image {
+  position: absolute;
+  top: 0;
+  right: -5vw;
+  width: 55vw;
+  height: 100%;
+  background-image: url('img/iw950 02.jpg');
+  background-size: cover;
+  background-position: center left;
+  filter: grayscale(100%) contrast(115%);
+  opacity: 0.15; /* 0.15로 상향 조정 */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.summary-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.summary-project-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 5rem;
+}
+
+.summary-case-number {
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-point);
+}
+
+.summary-project-title {
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  opacity: 0.15; /* 문구의 불투명도를 0.15로 고정 설정 */
+}
+
+.summary-project-meta {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.summary-details-grid {
+  display: flex;
+  gap: 4vw;
+  width: 100%;
+  align-items: flex-start;
+  border-top: 2px solid var(--color-bg-dark);
+  padding-top: 2.5rem;
+}
+
+.detail-block {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.detail-value {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 900;
+  color: var(--color-bg-dark);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.detail-impact-values {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.impact-val {
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.highlight-point {
+  color: var(--color-bg-dark);
+  font-weight: 900;
+  border-bottom: 2px solid var(--color-point);
+  padding-bottom: 2px;
+  width: fit-content;
 }
 
 /* HERO FOOTER & METADATA */
@@ -134,9 +269,8 @@ main {
   font-size: clamp(10px, 1.1vw, 12px);
   font-weight: 300;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
   color: rgba(0, 0, 0, 0.45);
-  margin-top: 0.8rem;
+  margin-top: 0.4rem; /* 15년 경력 문구 바로 밑으로 밀착 여백 축소 */
   display: block;
   word-break: keep-all;
 }
@@ -182,8 +316,18 @@ main {
 /* LinkedIn Icon link */
 .hero-social-link {
   margin-top: 1.2rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 0.8rem;
+}
+
+.social-label {
+  font-size: clamp(10px, 1.1vw, 12px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
 }
 
 .hero-social-link a {
@@ -351,6 +495,18 @@ body.dark-mode .section-copyright,
   color: var(--color-bg-dark);
   border-bottom: 2px solid var(--color-point); /* 네온 그린 포인트 밑줄로 시각적 피드백 제공 */
   padding-bottom: 2px;
+}
+
+.staggered-lines .line .summary-line {
+  font-size: clamp(0.9rem, 1.25vw, 1.05rem);
+  font-weight: 900;
+  color: var(--color-bg-dark);
+  margin-top: 1rem;
+  display: block;
+  letter-spacing: -0.01em;
+  border-left: 2px solid var(--color-point);
+  padding-left: 1rem;
+  word-break: keep-all;
 }
 
 /* 4. Cross-Functional Alignment Challenge (Black BG Zone) Styling */
@@ -876,6 +1032,36 @@ body.dark-mode {
   width: 100%;
 }
 
+/* PC screen mobile menu default hide */
+.menu-toggle {
+  display: none;
+}
+
+.mobile-menu-overlay {
+  display: none;
+}
+
+/* Scroll Progress Bar */
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-point);
+  z-index: 102;
+  transition: width 0.1s ease-out;
+}
+
+/* Scrollspy Active states */
+.header .nav-link.active {
+  color: var(--color-point);
+}
+
+.header .nav-link.active::after {
+  width: 100%;
+}
+
 /* ==========================================================================
    SECTION 3.5: DECISIONS
    ========================================================================== */
@@ -949,6 +1135,15 @@ body.dark-mode {
   font-weight: 900;
   line-height: 1.4;
   color: var(--color-bg-dark);
+  word-break: keep-all;
+}
+
+.decision-subtext {
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.55);
+  margin-top: 0.5rem;
   word-break: keep-all;
 }
 
@@ -1065,7 +1260,79 @@ body.dark-mode .footer-disclaimer {
   }
 
   .header .nav {
-    gap: 1rem;
+    display: none; /* 모바일에서 기존 가로 나열 메뉴 숨김 */
+  }
+
+  /* 모바일 햄버거 메뉴 토글 버튼 */
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 101; /* 오버레이보다 위 레이어 */
+    padding: 0;
+  }
+
+  .menu-toggle .menu-bar {
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff; /* mix-blend-mode: difference 와의 조화 고려 */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+  }
+
+  /* 햄버거 X자 트랜지션 애니메이션 */
+  .menu-toggle.active .menu-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .menu-toggle.active .menu-bar:nth-child(2) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* 모바일 풀스크린 오버레이 메뉴 */
+  .mobile-menu-overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-bg-dark);
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-menu-overlay.active {
+    transform: translateY(0);
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.2rem;
+  }
+
+  .mobile-nav-link {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--color-point);
+    transform: scale(1.05);
   }
 
   .section {
@@ -1111,7 +1378,12 @@ body.dark-mode .footer-disclaimer {
     margin-top: 1rem;
   }
 
-  .section-copyright,
+  /* 모바일에서 중간 섹션의 카피라이트 제거 */
+  .section-copyright {
+    display: none !important;
+  }
+
+  /* 홈 화면 하단 카피라이트만 다시 강제 노출 */
   .hero-copyright {
     position: relative;
     bottom: auto;
@@ -1120,7 +1392,7 @@ body.dark-mode .footer-disclaimer {
     margin-top: 4rem;
     text-align: center;
     width: 100%;
-    display: block;
+    display: block !important;
   }
 
   .footer-disclaimer {
@@ -1223,5 +1495,51 @@ body.dark-mode .footer-disclaimer {
     align-items: center;
     text-align: center;
     gap: 0.5rem;
+  }
+
+  /* Summary screen 모바일 대응 */
+  .summary-screen {
+    padding: 16vw 6vw;
+  }
+  
+  .summary-bg-image {
+    right: 0;
+    width: 100%;
+    opacity: 0.08; /* 모바일에서도 은은하게 볼 수 있도록 0.08 적용 */
+  }
+  
+  .summary-project-title {
+    margin-bottom: 3rem;
+  }
+  
+  .summary-details-grid {
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  
+  .detail-block {
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  /* Scrollspy Active style for Mobile */
+  .mobile-nav-link.active {
+    color: var(--color-point);
+    transform: scale(1.05);
+  }
+
+  /* 모바일 가독성 및 렌더링 성능 향상을 위한 애니메이션 방식 전환 (clip-path -> opacity) */
+  .js-enabled .mask-reveal {
+    clip-path: none !important;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mask-reveal.active {
+    clip-path: none !important;
+    opacity: 1;
+    transform: translateY(0);
   }
 }

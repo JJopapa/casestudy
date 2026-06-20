@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const revealOptions = {
     root: null,
-    // 뷰포트 도달 100px 전부터 미리 렌더링되게 마진 부여하여 가림 증상 제거
-    rootMargin: '100px 0px 100px 0px',
+    // 뷰포트 하단 50% 영역을 오프셋으로 차단하여 각 요소가 화면 정중앙(50% 지점)에 진입할 때 트리거
+    rootMargin: '0px 0px -50% 0px',
     threshold: 0.01 
   };
 
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const maskElements = document.querySelectorAll('.mask-reveal, .decision-card, .comparison-board, .leadership-col, .leadership-summary');
   maskElements.forEach(el => {
-    // 히어로 섹션 타이틀은 대기 없이 즉각 활성화
-    if (el.classList.contains('hero-title')) {
+    // 히어로 섹션 타이틀 및 요약 스크린 내부 요소는 대기 없이 즉각 활성화
+    if (el.classList.contains('hero-title') || el.closest('.summary-screen')) {
       setTimeout(() => {
         el.classList.add('active');
       }, 50);
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updateParallax = () => {
     // 1) Hero Section Parallax
-    if (microText && lastScrollY < window.innerHeight) {
+    if (microText && lastScrollY < window.innerHeight * 2) {
       const parallaxOffset = lastScrollY * 0.12; 
       microText.style.setProperty('--parallax-y', `${parallaxOffset}px`);
     }
@@ -119,16 +119,71 @@ document.addEventListener('DOMContentLoaded', () => {
         actionBgImg.style.setProperty('--action-parallax-y', `${parallaxOffset}px`);
       }
     }
+  };
+
+  // Scrollspy 및 Progress Bar 업데이트 로직
+  const sections = document.querySelectorAll('section, #hero, #context, #action, #decisions, #impact, #lesson');
+  const navLinksList = document.querySelectorAll('.nav-link');
+  const mobileLinksList = document.querySelectorAll('.mobile-nav-link');
+  const progressBar = document.querySelector('.scroll-progress-bar');
+
+  const updateActiveNavLink = () => {
+    let currentSectionId = '';
+    const scrollPosition = lastScrollY + (window.innerHeight * 0.5); // 뷰포트 중간 지점을 기준으로 액티브 섹션 계산
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSectionId = section.getAttribute('id');
+      }
+    });
+
+    if (currentSectionId) {
+      navLinksList.forEach(link => {
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      mobileLinksList.forEach(link => {
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  };
+
+  const updateProgressBar = () => {
+    if (!progressBar) return;
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (documentHeight > 0) {
+      const scrollPercentage = (lastScrollY / documentHeight) * 100;
+      progressBar.style.width = `${scrollPercentage}%`;
+    }
+  };
+
+  const updateScrollAnimations = () => {
+    updateParallax();
+    updateActiveNavLink();
+    updateProgressBar();
     ticking = false;
   };
 
   window.addEventListener('scroll', () => {
     lastScrollY = window.scrollY;
     if (!ticking) {
-      window.requestAnimationFrame(updateParallax);
+      window.requestAnimationFrame(updateScrollAnimations);
       ticking = true;
     }
   });
+
+  // 초기 로드 시 1회 강제 계산
+  updateActiveNavLink();
+  updateProgressBar();
 
   /* ==========================================================================
      5. NAVIGATION CLICK FAIL-SAFE (강제 노출 안전장치)
@@ -158,15 +213,51 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     6. CTA BUTTON INTERACTIVE FEEDBACK
+     6. MOBILE MENU INTERACTION (모바일 내비게이션 토글 및 이동 제어)
      ========================================================================== */
-  const ctaBtn = document.querySelector('.cta-button');
-  if (ctaBtn) {
-    ctaBtn.addEventListener('click', () => {
-      ctaBtn.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        ctaBtn.style.transform = 'scale(1.06)';
-      }, 150);
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (menuToggle && mobileOverlay) {
+    menuToggle.addEventListener('click', () => {
+      const isActive = menuToggle.classList.toggle('active');
+      mobileOverlay.classList.toggle('active');
+      
+      // 메뉴 활성화 시 화면 스크롤 잠금
+      if (isActive) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        // 메뉴 레이어 해제 및 스크롤 고정 해제
+        menuToggle.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+
+        if (targetSection) {
+          // 스무스 스크롤 이동
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+
+          // 스크롤 즉시 또는 직후 가려진 애니메이션 요소를 강제로 노출시키는 Fail-safe 처리
+          setTimeout(() => {
+            targetSection.querySelectorAll('.mask-reveal, .decision-card, .comparison-board, .leadership-col, .leadership-summary').forEach(el => {
+              el.classList.add('active');
+            });
+            targetSection.querySelectorAll('.impact-card').forEach(el => {
+              el.classList.add('revealed');
+            });
+          }, 300);
+        }
+      });
     });
   }
 });
